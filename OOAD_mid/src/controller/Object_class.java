@@ -32,8 +32,6 @@ public class Object_class extends JLabel{
 		}catch(IOException e){
 			
 		}
-		
-		//lb = new JLabel();
 				
 		ImageIcon ii = new ImageIcon();
 		ii.setImage(img);
@@ -43,14 +41,7 @@ public class Object_class extends JLabel{
 		
 		this.setLocation(p.x-MyCanvas.canvas_x, p.y-MyCanvas.canvas_y);
 		this.setSize(150, 100);
-		/*
-		this.addMouseListener(new MouseAdapter() {	
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				ClassClicked();
-			}
-		});
-		*/
+		
 		MyCanvas.class_list.add(this);
 		GUI.main_canvas.add(this);
 		System.out.println(p.x + " " +p.y);

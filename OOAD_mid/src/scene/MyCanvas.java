@@ -43,12 +43,7 @@ public class MyCanvas extends JPanel implements MouseListener{
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
-		g.setColor(Color.WHITE);
-		//g.drawRect(0, 0, 640, 580);
-		//g.fillRect(0, 0, 640, 580);
-		
-		g.setColor(black);
+
 		/*
 		for(Shape_class sc : class_list) {
 			g.drawImage(sc.img, sc.x-canvas_x, sc.y-canvas_y, this);

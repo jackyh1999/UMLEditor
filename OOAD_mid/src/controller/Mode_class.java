@@ -25,7 +25,7 @@ public class Mode_class extends Mode{
 			e.printStackTrace();
 		}
 		Image newimg = img.getScaledInstance(150, 100, Image.SCALE_SMOOTH);
-		Shape_class sc = new Shape_class(MouseInfo.getPointerInfo().getLocation());
+		Object_class sc = new Object_class(MouseInfo.getPointerInfo().getLocation());
 		//MyCanvas.class_list.add(sc);
 		
 		//System.out.println(r.x + " " + r.y);
