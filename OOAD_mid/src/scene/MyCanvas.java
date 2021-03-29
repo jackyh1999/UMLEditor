@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
@@ -18,6 +19,8 @@ import javax.swing.JPanel;
 
 import controller.Mode;
 import controller.Mode_class;
+import controller.Object_class;
+import controller.Shape_usecase;
 
 public class MyCanvas extends JPanel implements MouseListener{
 	
@@ -25,10 +28,11 @@ public class MyCanvas extends JPanel implements MouseListener{
 	public Color black = Color.BLACK; 
 	//public Rectangle r = new Rectangle(0, 0, 640, 580);
 	
-	private int canvas_x = 128;
-	private int canvas_y = 91;
+	public final static int canvas_x = 128;
+	public final static int canvas_y = 91;
 	
-	public static ArrayList<Rectangle> class_list = new ArrayList<Rectangle>();
+	public static ArrayList<Object_class> class_list = new ArrayList<Object_class>();
+	public static ArrayList<Shape_usecase> usecase_list = new ArrayList<Shape_usecase>();
 	
 	public MyCanvas() {
 		GUI.main_frame.add(this);
@@ -41,19 +45,23 @@ public class MyCanvas extends JPanel implements MouseListener{
 		super.paintComponent(g);
 		
 		g.setColor(Color.WHITE);
-		g.drawRect(0, 0, 640, 580);
-		g.fillRect(0, 0, 640, 580);
+		//g.drawRect(0, 0, 640, 580);
+		//g.fillRect(0, 0, 640, 580);
 		
 		g.setColor(black);
-		for(Rectangle r : class_list) {
-			//g.drawRect(r.x-canvas_x, r.y, r.width, r.height);
-			g.fillRect(r.x-canvas_x, r.y-canvas_y, r.width, r.height);
+		/*
+		for(Shape_class sc : class_list) {
+			g.drawImage(sc.img, sc.x-canvas_x, sc.y-canvas_y, this);
+		}
+		*/
+		for(Shape_usecase su : usecase_list) {
+			g.drawImage(su.img, su.x-canvas_x, su.y-canvas_y, this);
 		}
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		System.out.println("Canvas clicked.");
+		//System.out.println("Canvas clicked.");
 		Mode.mode.dosomething();
 		repaint();
 	}
@@ -73,13 +81,13 @@ public class MyCanvas extends JPanel implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println("Canvas Pressd.");
+		// System.out.println("Canvas Pressd.");
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println("Canvas released.");
+		// System.out.println("Canvas released.");
 	}
 	
 }
