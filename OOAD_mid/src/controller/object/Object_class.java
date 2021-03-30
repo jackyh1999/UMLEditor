@@ -23,8 +23,7 @@ public class Object_class extends MyObject implements MouseListener{
 	
 	public static final int width = 150;
 	public static final int height = 100;
-	private int x;
-	private int y;
+
 	
 	private Image img;
 	public JTextField tf = new JTextField();
@@ -50,23 +49,23 @@ public class Object_class extends MyObject implements MouseListener{
 		this.setSize(150, 100);
 		this.addMouseListener(this);		
 		
-		this.port =  new Port[4];
-		this.port[0] = new Port(this.x + 70, this.y - 10);
-		this.port[1] = new Port(this.x + 150, this.y + 45);
-		this.port[2] = new Port(this.x + 70, this.y + 100);
-		this.port[3] = new Port(this.x -10 , this.y + 45);
+		this.port =  new Object_port[4];
+		this.port[0] = new Object_port(this.x + 70, this.y - 10);
+		this.port[1] = new Object_port(this.x + 150, this.y + 45);
+		this.port[2] = new Object_port(this.x + 70, this.y + 100);
+		this.port[3] = new Object_port(this.x -10 , this.y + 45);
 		
-		MyCanvas.class_list.add(this);
+		MyObject.object_list.add(this);
 		GUI.main_canvas.add(this);
-		System.out.println(p.x + " " +p.y);
+		
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("Class Clicked");
+		//System.out.println("Class Clicked");
 		Mode.mode.ObjectClicked(this);
-		System.out.println("Class Clicked");
+		//System.out.println("Class Clicked");
 	}
 
 	@Override
@@ -92,4 +91,8 @@ public class Object_class extends MyObject implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	
+	
 }

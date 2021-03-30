@@ -1,5 +1,5 @@
 package controller.mode;
 
-public class Mode_genline {
+public class Mode_genline extends Mode{
 
 }

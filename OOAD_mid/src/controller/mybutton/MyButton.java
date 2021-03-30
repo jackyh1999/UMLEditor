@@ -18,28 +18,30 @@ public abstract class MyButton extends JButton{
 	
 	public MyButton() {
 		
-		button_list.add(this);
-		GUI.main_frame.add(this);
 		this.addMouseListener(new MouseAdapter() {	
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ButtonClicked();
 			}
 		});
+		
+		button_list.add(this);
+		GUI.main_frame.add(this);		
+		
 	}
 	
 	public void ButtonClicked() {
-		System.out.println("Clicked.");
+		
 		for(JButton btn : button_list) {
 			if(btn.equals(this)) 
 				this.setBackground(Color.DARK_GRAY);
 			else
 				btn.setBackground(null);			
 		}	
-		this.ButtonAction();
+		this.ChangeMode();
 	}
 	
-	public abstract void ButtonAction();
+	public abstract void ChangeMode();
 	
 	public ImageIcon AdjustIconSize(ImageIcon icon) {
 		Image img = icon.getImage();

@@ -17,12 +17,12 @@ public class MyButton_select extends MyButton {
 	public MyButton_select(ImageIcon icon) {
 		this.setSize(GUI.button_width, GUI.button_height);
 		this.setIcon(AdjustIconSize(icon));
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
-	public void ButtonAction() {
-		// TODO Auto-generated method stub
+	public void ChangeMode() {
+		
 		Mode.mode = Mode.mode_select;
 		System.out.println("Mode:select.");
 		

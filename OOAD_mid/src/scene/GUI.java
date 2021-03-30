@@ -1,27 +1,15 @@
 package scene;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import controller.menu.MyMenuItem_group;
 import controller.mybutton.*;
 
 
@@ -32,8 +20,9 @@ public class GUI {
 	public static JMenuBar menu_bar = new JMenuBar();
 	public static JMenu menu_file = new JMenu("File");
 	public static JMenu menu_edit = new JMenu("Edit"); 
+	public static JMenuItem mitem_group = new MyMenuItem_group();
+	public static JMenuItem mitem_ungroup = new MyMenuItem_group();
 	
-	//private BufferedImage img_select;
 	private static ImageIcon icon_select = new ImageIcon("src/Material/select.PNG");
 	private static ImageIcon icon_assline = new ImageIcon("src/Material/assline.PNG");
 	private static ImageIcon icon_genline = new ImageIcon("src/Material/genline.PNG");
@@ -57,15 +46,11 @@ public class GUI {
 	
 	
 	public GUI() {
-		//Image img = icon_select.getImage();
-		//Image newimg = img.getScaledInstance( 40, 40,  Image.SCALE_SMOOTH ) ;  
-		//icon_select = new ImageIcon( newimg );
-		//btn_select.setRolloverIcon(icon_select);
-		//icon_select.
 		
 		
 		MainFrameInit();
 		MenuBarInit();
+		MenuInit();
 		ButtonSelectInit();
 		ButtonAsslineInit();
 		ButtonGenlineInit();
@@ -91,11 +76,15 @@ public class GUI {
 		main_frame.add(menu_bar);
 	}
 	
+	private void MenuInit() {
+		mitem_group.setText("Group");
+		mitem_ungroup.setText("UnGroup");
+		menu_edit.add(mitem_group);
+		menu_edit.add(mitem_ungroup);
+	}
+	
 	private void ButtonSelectInit() {
-		//btn_select.setPreferredSize(new Dimension(20,60));
 		btn_select.setLocation(20, 60);
-		//btn_select.setBounds(20,60,button_width,button_height);	
-		//btn_select.setIcon(icon_select);
 	}
 	
 	private void ButtonAsslineInit() {
@@ -122,10 +111,6 @@ public class GUI {
 		main_canvas.setLocation(120, 60);
 		main_canvas.setSize(640, 580);
 		main_canvas.setBackground(Color.WHITE);
-		//main_canvas.setBounds(120, 60, 640, 580);
-		//canvas.setBackground(Color.WHITE);	
 	}	
-	
-	
-	
+		
 }

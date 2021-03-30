@@ -21,8 +21,7 @@ public class Object_usecase extends MyObject implements MouseListener{
 	public static final int height = 100;
 	
 	public Image img;
-	public int x;
-	public int y;
+
 	
 	public Object_usecase(Point p) {
 
@@ -44,13 +43,13 @@ public class Object_usecase extends MyObject implements MouseListener{
 		this.setSize(150, 100);
 		this.addMouseListener(this);		
 		
-		this.port =  new Port[4];
-		this.port[0] = new Port(this.x + 70, this.y - 10);
-		this.port[1] = new Port(this.x + 150, this.y + 45);
-		this.port[2] = new Port(this.x + 70, this.y + 100);
-		this.port[3] = new Port(this.x -10 , this.y + 45);
+		this.port =  new Object_port[4];
+		this.port[0] = new Object_port(this.x + 70, this.y - 10);
+		this.port[1] = new Object_port(this.x + 150, this.y + 45);
+		this.port[2] = new Object_port(this.x + 70, this.y + 100);
+		this.port[3] = new Object_port(this.x -10 , this.y + 45);
 		
-		MyCanvas.usecase_list.add(this);
+		MyObject.object_list.add(this);
 		GUI.main_canvas.add(this);
 	}
 

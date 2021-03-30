@@ -14,8 +14,8 @@ public class MyButton_usecase extends MyButton{
 	}
 	
 	@Override
-	public void ButtonAction() {
-		// TODO Auto-generated method stub
+	public void ChangeMode() {
+		
 		Mode.mode = new Mode_usecase();
 		System.out.println("Mode:usecase");
 	}
