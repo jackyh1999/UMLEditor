@@ -17,10 +17,8 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import controller.Mode;
-import controller.Mode_class;
-import controller.Object_class;
-import controller.Shape_usecase;
+import controller.mode.*;
+import controller.object.*;
 
 public class MyCanvas extends JPanel implements MouseListener{
 	
@@ -32,39 +30,28 @@ public class MyCanvas extends JPanel implements MouseListener{
 	public final static int canvas_y = 91;
 	
 	public static ArrayList<Object_class> class_list = new ArrayList<Object_class>();
-	public static ArrayList<Shape_usecase> usecase_list = new ArrayList<Shape_usecase>();
+	public static ArrayList<Object_usecase> usecase_list = new ArrayList<Object_usecase>();
 	
 	public MyCanvas() {
 		GUI.main_frame.add(this);
 		this.addMouseListener(this);
-		System.out.println("MyCanvas Constructor.");
+
 	}
 	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		/*
-		for(Shape_class sc : class_list) {
-			g.drawImage(sc.img, sc.x-canvas_x, sc.y-canvas_y, this);
-		}
-		*/
-		for(Shape_usecase su : usecase_list) {
-			g.drawImage(su.img, su.x-canvas_x, su.y-canvas_y, this);
-		}
 	}
 	
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		//System.out.println("Canvas clicked.");
-		Mode.mode.dosomething();
+	public void mouseClicked(MouseEvent arg0) {		
+		Mode.mode.CanvasClicked();
 		repaint();
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		//System.out.println("Canvas entered.");
 	}
 
 	@Override

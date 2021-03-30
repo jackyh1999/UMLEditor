@@ -22,7 +22,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
-import controller.*;
+import controller.mybutton.*;
 
 
 public class GUI {

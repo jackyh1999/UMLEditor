@@ -1,4 +1,4 @@
-package scene;
+package controller.mybutton;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
+import scene.GUI;
 
 public abstract class MyButton extends JButton{
 	

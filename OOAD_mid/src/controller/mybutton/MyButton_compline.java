@@ -1,9 +1,7 @@
-package controller;
+package controller.mybutton;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-
-import scene.MyButton;
 
 public class MyButton_compline extends MyButton {
 

@@ -1,22 +1,24 @@
-package controller;
+package controller.mybutton;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-import scene.MyButton;
+public class MyButton_assline extends MyButton{
 
-public class MyButton_usecase extends MyButton{
+	public MyButton_assline() {
+		
+		// TODO Auto-generated constructor stub
+	}
 
-	public MyButton_usecase(ImageIcon icon) {
+	public MyButton_assline(ImageIcon icon) {
 		this.setIcon(AdjustIconSize(icon));
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public void ButtonAction() {
 		// TODO Auto-generated method stub
-		Mode.mode = new Mode_usecase();
-		System.out.println("Mode:usecase");
+		
 	}
 
 }
