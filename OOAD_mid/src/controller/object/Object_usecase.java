@@ -42,6 +42,7 @@ public class Object_usecase extends MyObject implements MouseListener{
 		this.setLocation(this.x, this.y);
 		this.setSize(150, 100);
 		this.addMouseListener(this);		
+		this.layer = GUI.object_layer++;
 		
 		this.port =  new Object_port[4];
 		this.port[0] = new Object_port(this.x + 70, this.y - 10);
@@ -50,7 +51,8 @@ public class Object_usecase extends MyObject implements MouseListener{
 		this.port[3] = new Object_port(this.x -10 , this.y + 45);
 		
 		MyObject.object_list.add(this);
-		GUI.main_canvas.add(this);
+		GUI.main_canvas.add(this, this.layer, 0);
+		
 	}
 
 	@Override

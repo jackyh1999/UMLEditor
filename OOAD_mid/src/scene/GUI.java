@@ -1,15 +1,20 @@
 package scene;
 
 import java.awt.Color;
+import java.awt.Container;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.OverlayLayout;
 
 import controller.menu.MyMenuItem_group;
+import controller.menu.MyMenuItem_ungroup;
 import controller.mybutton.*;
 
 
@@ -21,7 +26,7 @@ public class GUI {
 	public static JMenu menu_file = new JMenu("File");
 	public static JMenu menu_edit = new JMenu("Edit"); 
 	public static JMenuItem mitem_group = new MyMenuItem_group();
-	public static JMenuItem mitem_ungroup = new MyMenuItem_group();
+	public static JMenuItem mitem_ungroup = new MyMenuItem_ungroup();
 	
 	private static ImageIcon icon_select = new ImageIcon("src/Material/select.PNG");
 	private static ImageIcon icon_assline = new ImageIcon("src/Material/assline.PNG");
@@ -40,10 +45,11 @@ public class GUI {
 	public static final int button_width = 80;
 	public static final int button_height = 80;
 	
-	public static JPanel main_canvas = new MyCanvas();
+	public static JLayeredPane main_canvas = new MyCanvas();
 	public static final int canvas_xaxis = 120;
 	public static final int canvas_yaxis = 60;	
 	
+	public static int object_layer = 0;
 	
 	public GUI() {
 		
@@ -62,6 +68,7 @@ public class GUI {
 	
 	private void MainFrameInit(){
 		main_frame.setSize(800, 700);
+		main_frame.setResizable(false);
 		main_frame.setLayout(null);
 		main_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
         main_frame.setVisible(true);
@@ -108,9 +115,11 @@ public class GUI {
 	}
 	
 	private void MainCanvasInit() {
+		//main_canvas.setLayout(new OverlayLayout(main_canvas));
 		main_canvas.setLocation(120, 60);
 		main_canvas.setSize(640, 580);
 		main_canvas.setBackground(Color.WHITE);
+		main_canvas.setOpaque(true);
 	}	
 		
 }

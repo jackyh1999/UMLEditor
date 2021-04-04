@@ -55,4 +55,19 @@ public class Mode {
 	public void UnGroup() {
 		
 	}
+
+	public void ObjectPressed(MyObject mo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void ObjectReleased() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void ObjectDragged(MyObject mo) {
+		// TODO Auto-generated method stub
+		
+	}
 }

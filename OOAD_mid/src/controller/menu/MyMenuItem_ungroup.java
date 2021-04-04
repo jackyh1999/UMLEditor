@@ -9,6 +9,10 @@ import controller.mode.Mode;
 
 public class MyMenuItem_ungroup extends JMenuItem implements ActionListener{
 
+	public MyMenuItem_ungroup() {
+		this.addActionListener(this);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

@@ -13,9 +13,10 @@ import javax.swing.JLabel;
 
 import scene.GUI;
 
-public class Object_port extends JLabel{
+public class Object_port extends MyObject{
 	
 	private Image img;
+	
 	public static ArrayList<Object_port> port_list = new ArrayList<Object_port>();
 	
 	public Object_port(int x, int y) {
@@ -29,6 +30,9 @@ public class Object_port extends JLabel{
 		
 		ImageIcon ii = new ImageIcon();
 		ii.setImage(img);		
+		
+		this.x = x;
+		this.y = y;
 		
 		this.setIcon(ii);
 		this.setLocation(x, y);

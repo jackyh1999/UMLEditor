@@ -1,5 +1,7 @@
 package controller.mode;
 
+import java.awt.MouseInfo;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,9 @@ import scene.MyCanvas;
 
 public class Mode_select extends Mode{	
 	
-	public List<MyObject> selected_list = new ArrayList<MyObject>();
+	public static List<MyObject> selected_list = new ArrayList<MyObject>();
+	int mouse_begin_x;
+	int mouse_begin_y;
 	
 	@Override
 	public void Initialize() {
@@ -32,19 +36,33 @@ public class Mode_select extends Mode{
 		
 	}
 	
+	public void ObjectPressed(MyObject mo) {
+		//mouse_begin_x = MouseInfo.getPointerInfo().getLocation().x - MyCanvas.canvas_x;
+		//mouse_begin_y = MouseInfo.getPointerInfo().getLocation().y - MyCanvas.canvas_y;
+		mo.StartMove();
+	}
+	
+	@Override
+	public void ObjectDragged(MyObject mo) {
+		mo.Move();
+		//System.out.println("Drag");
+	}
+	
+	public void ObjectReleased() {
+		
+	}
+	
 	@Override
 	public void CanvasReleased() {
-		
+		Unselect();
 		for(MyObject mo : MyObject.object_list) {
 			//System.out.println(mo.x+)
-			if( mo.x > MyCanvas.mouse_begin_x &&
-				mo.y > MyCanvas.mouse_begin_y &&
-				mo.x + MyObject.width  < MyCanvas.mouse_end_x &&
-				mo.y + MyObject.height < MyCanvas.mouse_end_y) 
+			if( IsInSelectRange(mo) )
+					
 			{
 				//System.out.println("Object selected.");
 				mo.Select();
-				selected_list.add(mo);
+				//selected_list.add(mo);
 				//Select(mo);
 			}
 		}
@@ -56,6 +74,7 @@ public class Mode_select extends Mode{
 			p.setEnabled(false);
 		}
 		Object_port.port_list.clear();
+		selected_list.clear();
 	}
 	
 	@Override
@@ -63,16 +82,37 @@ public class Mode_select extends Mode{
 		Object_composite oc = new Object_composite();
 		for(MyObject mo : selected_list) {
 			mo.group = oc;
-			oc.grouped_object.add(mo);
+			oc.member_list.add(mo);
+			MyObject.object_list.remove(oc);
 		}
+		
 		//oc.grouped_object = selected_list;
 		//for(MyObject mo : oc.grouped_object) System.out.println(mo);
 		selected_list.clear();
 	}
 	
+	@Override
 	public void UnGroup() {
-		
+		//System.out.println("Ungrouped");
+		MyObject grouped_object = selected_list.get(0);
+		MyObject.object_list.remove(grouped_object);
+		for(MyObject mo : grouped_object.member_list) {
+			mo.group = null;
+			MyObject.object_list.add(mo);
+		}
+		selected_list.remove(0);
 	}
 	
+	public Boolean IsInSelectRange(MyObject mo) {
+		Rectangle r1 = new Rectangle( Math.min(MyCanvas.mouse_begin_x, MyCanvas.mouse_end_x), 
+									  Math.min(MyCanvas.mouse_begin_y, MyCanvas.mouse_end_y),
+									  Math.abs(MyCanvas.mouse_end_x - MyCanvas.mouse_begin_x),
+									  Math.abs(MyCanvas.mouse_end_y - MyCanvas.mouse_begin_y));
+		Rectangle r2 = new Rectangle(mo.x, mo.y, mo.width, mo.height);
+		
+		if(	r1.contains(r2)	) return true;
+		else return false;
+		
+	}
 	
 }

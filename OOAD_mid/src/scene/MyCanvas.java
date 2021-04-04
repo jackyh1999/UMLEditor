@@ -8,12 +8,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import controller.mode.*;
 import controller.object.*;
 
-public class MyCanvas extends JPanel implements MouseListener, MouseMotionListener{
+public class MyCanvas extends JLayeredPane implements MouseListener, MouseMotionListener{
 	
 	public static Graphics2D g2d;
 	public Color black = Color.BLACK; 
@@ -48,6 +50,8 @@ public class MyCanvas extends JPanel implements MouseListener, MouseMotionListen
 	public void mouseClicked(MouseEvent arg0) {		
 		Mode.mode.CanvasClicked();
 		repaint();
+		System.out.println(MouseInfo.getPointerInfo().getLocation());
+		System.out.println(getMousePosition());
 	}
 
 	@Override
@@ -62,8 +66,8 @@ public class MyCanvas extends JPanel implements MouseListener, MouseMotionListen
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		mouse_begin_x = MouseInfo.getPointerInfo().getLocation().x - canvas_x;
-		mouse_begin_y = MouseInfo.getPointerInfo().getLocation().y - canvas_y;
+		mouse_begin_x = getMousePosition().x;
+		mouse_begin_y = getMousePosition().y;
 		//Mode.mode.CanvasPressed();
 	}
 
@@ -80,8 +84,8 @@ public class MyCanvas extends JPanel implements MouseListener, MouseMotionListen
 	@Override
 	public void mouseDragged(MouseEvent me) {
 		//Mode.mode.CanvasDragged();
-		mouse_end_x = MouseInfo.getPointerInfo().getLocation().x - canvas_x;
-		mouse_end_y = MouseInfo.getPointerInfo().getLocation().y - canvas_y;
+		mouse_end_x = getMousePosition().x;
+		mouse_end_y = getMousePosition().y;
 		//System.out.println("Draggggg");
 		
 		repaint();		

@@ -16,7 +16,7 @@ public class MyMenuItem_group extends JMenuItem implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("item select");
+		//System.out.println("item select");
 		Mode.mode.Group();
 		
 	}

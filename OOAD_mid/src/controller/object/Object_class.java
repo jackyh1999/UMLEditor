@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +20,7 @@ import controller.mode.*;
 import scene.GUI;
 import scene.MyCanvas;
 
-public class Object_class extends MyObject implements MouseListener{
+public class Object_class extends MyObject implements MouseListener, MouseMotionListener{
 	
 	public static final int width = 150;
 	public static final int height = 100;
@@ -45,18 +46,27 @@ public class Object_class extends MyObject implements MouseListener{
 		ii.setImage(img);
 		this.setIcon(AdjustIconSize(ii));
 		
+		//this.setVerticalAlignment(TOP);
+		this.setText("Hi");
+		this.setHorizontalTextPosition(0);
+		this.setVerticalTextPosition(0);
+		
 		this.setLocation(this.x, this.y);
 		this.setSize(150, 100);
-		this.addMouseListener(this);		
+		this.addMouseListener(this);	
+		this.addMouseMotionListener(this);
+		this.layer = GUI.object_layer++;
 		
 		this.port =  new Object_port[4];
 		this.port[0] = new Object_port(this.x + 70, this.y - 10);
 		this.port[1] = new Object_port(this.x + 150, this.y + 45);
 		this.port[2] = new Object_port(this.x + 70, this.y + 100);
 		this.port[3] = new Object_port(this.x -10 , this.y + 45);
+		//this.member_list.add(this);
 		
 		MyObject.object_list.add(this);
-		GUI.main_canvas.add(this);
+		GUI.main_canvas.add(this, this.layer, 0);
+		System.out.println(this.layer);
 		
 	}
 
@@ -71,13 +81,14 @@ public class Object_class extends MyObject implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		//getMousePosition();
+		Mode.mode.ObjectPressed(this);
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		//Mode.mode.ObjectReleased();
 	}
 
 	@Override
@@ -88,6 +99,19 @@ public class Object_class extends MyObject implements MouseListener{
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		//System.out.println("Drag");
+		Mode.mode.ObjectDragged(this);
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
