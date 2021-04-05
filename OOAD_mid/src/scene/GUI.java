@@ -1,18 +1,24 @@
 package scene;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.OverlayLayout;
 
+import controller.menu.MyMenuItem_changename;
 import controller.menu.MyMenuItem_group;
 import controller.menu.MyMenuItem_ungroup;
 import controller.mybutton.*;
@@ -27,6 +33,7 @@ public class GUI {
 	public static JMenu menu_edit = new JMenu("Edit"); 
 	public static JMenuItem mitem_group = new MyMenuItem_group();
 	public static JMenuItem mitem_ungroup = new MyMenuItem_ungroup();
+	public static JMenuItem mitem_changename = new MyMenuItem_changename();
 	
 	private static ImageIcon icon_select = new ImageIcon("src/Material/select.PNG");
 	private static ImageIcon icon_assline = new ImageIcon("src/Material/assline.PNG");
@@ -45,10 +52,14 @@ public class GUI {
 	public static final int button_width = 80;
 	public static final int button_height = 80;
 	
-	public static JLayeredPane main_canvas = new MyCanvas();
+	public static MyCanvas main_canvas = new MyCanvas();
 	public static final int canvas_xaxis = 120;
 	public static final int canvas_yaxis = 60;	
 	
+	public static JPanel change_name_window = new JPanel(new FlowLayout());
+	public static JTextArea cnw_textarea = new JTextArea();
+	public static JButton cnw_btn_ok = new MyButton_cnwok();
+	public static JButton cnw_btn_cancel = new MyButton_cnwcancel();
 	public static int object_layer = 0;
 	
 	public GUI() {
@@ -64,6 +75,7 @@ public class GUI {
 		ButtonClassInit();
 		ButtonUsecaseInit();
 		MainCanvasInit();
+		ChangeNameWindowInit();
 	}
 	
 	private void MainFrameInit(){
@@ -86,8 +98,11 @@ public class GUI {
 	private void MenuInit() {
 		mitem_group.setText("Group");
 		mitem_ungroup.setText("UnGroup");
+		mitem_changename.setText("Change object name");
+		
 		menu_edit.add(mitem_group);
 		menu_edit.add(mitem_ungroup);
+		menu_edit.add(mitem_changename);
 	}
 	
 	private void ButtonSelectInit() {
@@ -121,5 +136,33 @@ public class GUI {
 		main_canvas.setBackground(Color.WHITE);
 		main_canvas.setOpaque(true);
 	}	
+	
+	private void ChangeNameWindowInit() {
+		
+		//change_name_window.setBounds(250, 250, 300, 200);
+		change_name_window.setLocation(150, 250);
+		change_name_window.setSize(250, 40);
+		change_name_window.setBackground(Color.LIGHT_GRAY);
+		
+		/*
+		cnw_textarea.setLocation(50, 50);
+		cnw_textarea.setSize(200, 50);
+		cnw_btn_ok.setLocation(50, 150);
+		cnw_btn_ok.setSize(100, 50);
+		*/
+		cnw_textarea.setPreferredSize(new Dimension(100, 20));
+		cnw_btn_ok.setText("OK");
+		cnw_btn_cancel.setText("Cancel");
+		//cnw_btn_ok.setSize(50, 20);
+		//cnw_btn_cancel.setSize(50, 20);
+		change_name_window.add(cnw_textarea);
+		
+		change_name_window.add(cnw_btn_ok);
+		change_name_window.add(cnw_btn_cancel);
+		change_name_window.setVisible(false);
+		change_name_window.setEnabled(false);
+		//change_name_window.setOpaque(true);
+		main_canvas.add(change_name_window);
+	}
 		
 }

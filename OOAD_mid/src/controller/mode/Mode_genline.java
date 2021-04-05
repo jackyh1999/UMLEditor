@@ -1,5 +1,18 @@
 package controller.mode;
 
-public class Mode_genline extends Mode{
+import controller.object.MyObject;
 
+public class Mode_genline extends Mode{
+	public void ObjectPressed(MyObject mo) {
+
+	}
+	
+	@Override
+	public void ObjectDragged(MyObject mo) {
+
+	}
+	
+	public void ObjectReleased() {
+		
+	}
 }

@@ -37,7 +37,7 @@ public class Object_usecase extends MyObject implements MouseListener{
 				
 		ImageIcon ii = new ImageIcon();
 		ii.setImage(img);
-		this.setIcon(AdjustIconSize(ii));
+		//this.setIcon(AdjustIconSize(ii));
 		
 		this.setLocation(this.x, this.y);
 		this.setSize(150, 100);

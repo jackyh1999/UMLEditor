@@ -9,6 +9,7 @@ import controller.object.MyObject;
 import controller.object.Object_composite;
 import controller.object.Object_member;
 import controller.object.Object_port;
+import scene.GUI;
 import scene.MyCanvas;
 
 public class Mode_select extends Mode{	
@@ -60,7 +61,7 @@ public class Mode_select extends Mode{
 			if( IsInSelectRange(mo) )
 					
 			{
-				//System.out.println("Object selected.");
+				System.out.println("Object selected.");
 				mo.Select();
 				//selected_list.add(mo);
 				//Select(mo);
@@ -103,11 +104,22 @@ public class Mode_select extends Mode{
 		selected_list.remove(0);
 	}
 	
+	
+	public void ChangeName() {
+		
+		GUI.change_name_window.setVisible(true);
+		GUI.change_name_window.setEnabled(true);
+		
+	}
+	
 	public Boolean IsInSelectRange(MyObject mo) {
+		/*
 		Rectangle r1 = new Rectangle( Math.min(MyCanvas.mouse_begin_x, MyCanvas.mouse_end_x), 
 									  Math.min(MyCanvas.mouse_begin_y, MyCanvas.mouse_end_y),
 									  Math.abs(MyCanvas.mouse_end_x - MyCanvas.mouse_begin_x),
 									  Math.abs(MyCanvas.mouse_end_y - MyCanvas.mouse_begin_y));
+		*/
+		Rectangle r1 = MyCanvas.fill_rect;
 		Rectangle r2 = new Rectangle(mo.x, mo.y, mo.width, mo.height);
 		
 		if(	r1.contains(r2)	) return true;

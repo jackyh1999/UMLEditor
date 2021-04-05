@@ -56,6 +56,10 @@ public class Mode {
 		
 	}
 
+	public void ChangeName() {
+		
+	}
+	
 	public void ObjectPressed(MyObject mo) {
 		// TODO Auto-generated method stub
 		

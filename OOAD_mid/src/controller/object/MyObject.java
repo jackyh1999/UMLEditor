@@ -7,9 +7,11 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import controller.mode.Mode_select;
+import scene.GUI;
 import scene.MyCanvas;
 
 
@@ -28,7 +30,7 @@ public class MyObject extends JLabel{
 	public static int dist_x;
 	public static int dist_y;
 	
-	
+	public String text = new String();
 	protected int layer;
 	
 	public Object_port[] port;
@@ -42,8 +44,10 @@ public class MyObject extends JLabel{
 	
 	public void Select() {	
 		if(this.group == null) {
-			PortVisible(this);			
+			PortVisible(this);
 			Mode_select.selected_list.add(this);
+			GUI.main_canvas.repaint();
+			System.out.println("repaint");
 		}
 		else {		
 			this.group.Select();

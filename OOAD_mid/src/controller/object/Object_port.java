@@ -19,8 +19,11 @@ public class Object_port extends MyObject{
 	
 	public static ArrayList<Object_port> port_list = new ArrayList<Object_port>();
 	
+	public int width = 10;
+	public int height = 10;
+	
 	public Object_port(int x, int y) {
-		
+		/*
 		try {
 			img = ImageIO.read(new File("src/material/port.png"));
 		}
@@ -30,17 +33,17 @@ public class Object_port extends MyObject{
 		
 		ImageIcon ii = new ImageIcon();
 		ii.setImage(img);		
-		
+		*/
 		this.x = x;
 		this.y = y;
 		
-		this.setIcon(ii);
+		
 		this.setLocation(x, y);
 		this.setSize(10, 10);
-		//this.setBackground(new Color(0, 0, 0));
+		
 		
 		//this.setVisible(false);
-		this.setEnabled(false);
+		//this.setEnabled(false);
 		GUI.main_canvas.add(this);
 	}
 	
