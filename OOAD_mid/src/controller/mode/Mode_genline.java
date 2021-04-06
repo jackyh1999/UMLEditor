@@ -2,17 +2,7 @@ package controller.mode;
 
 import controller.object.MyObject;
 
-public class Mode_genline extends Mode{
-	public void ObjectPressed(MyObject mo) {
-
-	}
+public class Mode_genline extends Mode_line{
 	
-	@Override
-	public void ObjectDragged(MyObject mo) {
-
-	}
 	
-	public void ObjectReleased() {
-		
-	}
 }

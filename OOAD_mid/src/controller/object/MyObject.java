@@ -2,6 +2,7 @@ package controller.object;
 
 import java.awt.Image;
 import java.awt.MouseInfo;
+import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,6 @@ import javax.swing.JPanel;
 import controller.mode.Mode_select;
 import scene.GUI;
 import scene.MyCanvas;
-
 
 // Change to extend JPanel
 public class MyObject extends JLabel{
@@ -34,6 +34,8 @@ public class MyObject extends JLabel{
 	protected int layer;
 	
 	public Object_port[] port;
+	public Polygon[] range;
+	//p.addPoint(mo.x, mo.y);
 	public Object_composite group = null;
 	public List<MyObject> member_list = new ArrayList<MyObject>();	
 	public static ArrayList<MyObject> object_list = new ArrayList<MyObject>();

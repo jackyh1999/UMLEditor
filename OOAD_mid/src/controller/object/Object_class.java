@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Polygon;
 import java.awt.ScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -72,6 +73,27 @@ public class Object_class extends MyObject implements MouseListener, MouseMotion
 		this.port[3] = new Object_port(this.x -10 , this.y + 45);
 		//this.member_list.add(this);
 		
+		this.range = new Polygon[4];
+		this.range[0] = new Polygon();
+		this.range[0].addPoint(this.x, this.y);
+		this.range[0].addPoint(this.x + this.width, this.y);
+		this.range[0].addPoint(this.x + this.width/2, this.y + this.height/2);
+		
+		this.range[1] = new Polygon();
+		this.range[1].addPoint(this.x + this.width, this.y);
+		this.range[1].addPoint(this.x + this.width/2, this.y + this.height/2);
+		this.range[1].addPoint(this.x + this.width, this.y + this.height);
+		
+		this.range[2] = new Polygon();
+		this.range[2].addPoint(this.x + this.width/2, this.y + this.height/2);
+		this.range[2].addPoint(this.x + this.width, this.y + this.height);
+		this.range[2].addPoint(this.x, this.y + this.height);
+		
+		this.range[3] = new Polygon();
+		this.range[3].addPoint(this.x + this.width/2, this.y + this.height/2);
+		this.range[3].addPoint(this.x, this.y + this.height);
+		this.range[3].addPoint(this.x, this.y);
+		
 		//MyObject.object_list.add(this);
 		GUI.main_canvas.add(this, this.layer, 0);
 		//GUI.main_canvas.add(this.lb2, this.layer, 1);
@@ -98,13 +120,13 @@ public class Object_class extends MyObject implements MouseListener, MouseMotion
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		//Mode.mode.ObjectReleased();
+		Mode.mode.ObjectReleased(this, e);
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		Mode.mode.ObjectEntered(this);
 	}
 
 	@Override

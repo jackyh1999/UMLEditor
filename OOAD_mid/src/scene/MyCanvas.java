@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import controller.line.Line;
 import controller.mode.*;
 import controller.object.*;
 
@@ -62,11 +63,19 @@ public class MyCanvas extends JLayeredPane implements MouseListener, MouseMotion
 			g.drawRect(mo.x, mo.y, mo.width, mo.height);
 			g.drawLine(mo.x, mo.y+33 , mo.x+150 , mo.y+33);
 			g.drawLine(mo.x, mo.y+66 , mo.x+150 , mo.y+66);
+			
+			g.drawPolygon(mo.range[0]);
+			g.drawPolygon(mo.range[1]);
+			g.drawPolygon(mo.range[2]);
+			g.drawPolygon(mo.range[3]);
 			g.drawString(mo.text, mo.x+20, mo.y+20);
 		}		
 		g.setColor(Color.BLACK);
 		for(Object_port op : Object_port.port_list) {	
 			g.fillRect(op.x, op.y, op.width, op.height);		
+		}
+		for(Line line : Line.line_list) {
+			g.drawLine(line.begin_port.x, line.begin_port.y, line.end_port.x, line.end_port.y);
 		}
 	}
 	/*

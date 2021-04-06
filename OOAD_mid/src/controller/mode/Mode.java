@@ -2,6 +2,7 @@ package controller.mode;
 
 import java.awt.MouseInfo;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 
@@ -65,13 +66,17 @@ public class Mode {
 		
 	}
 
-	public void ObjectReleased() {
+	public void ObjectReleased(MyObject mo, MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	public void ObjectDragged(MyObject mo) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public void ObjectEntered(MyObject mo) {
 		
 	}
 }
