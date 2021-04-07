@@ -3,39 +3,34 @@ package scene;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.MouseInfo;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
 
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 
-import controller.line.Line;
-import controller.mode.*;
-import controller.object.*;
+import function.line.MyLine;
+import function.mode.MyMode;
+import function.object.MyObject;
+import function.object.MyObject_Port;
 
 public class MyCanvas extends JLayeredPane implements MouseListener, MouseMotionListener{
 	
 	public static Graphics2D g2d;
-	public Color c = Color.BLACK; 
-	//public Rectangle r = new Rectangle(0, 0, 640, 580);
+	private Color c = Color.BLACK; 
+	public static int object_layer = 0;
 	
 	public final static int canvas_x = 128;
 	public final static int canvas_y = 91;
-	
-	public static int rect_x = 0;
-	public static int rect_y = 0;
-	public static int rect_w = 0;
-	public static int rect_h = 0;
+
 	public static Rectangle draw_rect = new Rectangle();
 	public static Rectangle fill_rect = new Rectangle();
-	public int line_begin_x;
-	public int line_begin_y;
-	public int line_end_x;
-	public int line_end_y;
+	
+	private int line_begin_x;
+	private int line_begin_y;
+	private int line_end_x;
+	private int line_end_y;
 	private int mouse_begin_x;
 	private int mouse_begin_y;
 	private int mouse_end_x;
@@ -53,39 +48,25 @@ public class MyCanvas extends JLayeredPane implements MouseListener, MouseMotion
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(c);
+		g.setColor(Color.CYAN);
 		g.drawRect(draw_rect.x, draw_rect.y, draw_rect.width, draw_rect.height);
 		g.fillRect(fill_rect.x, fill_rect.y, fill_rect.width, fill_rect.height);		
-		for(MyObject mo : MyObject.object_list) {
-			g.setColor(Color.LIGHT_GRAY);
-			g.fillRect(mo.x, mo.y, mo.width, mo.height);
-			g.setColor(Color.BLACK);
-			g.drawRect(mo.x, mo.y, mo.width, mo.height);
-			g.drawLine(mo.x, mo.y+33 , mo.x+150 , mo.y+33);
-			g.drawLine(mo.x, mo.y+66 , mo.x+150 , mo.y+66);
-			
-			g.drawPolygon(mo.range[0]);
-			g.drawPolygon(mo.range[1]);
-			g.drawPolygon(mo.range[2]);
-			g.drawPolygon(mo.range[3]);
-			g.drawString(mo.text, mo.x+20, mo.y+20);
+		for(MyObject obj : MyObject.object_list) {
+			obj.DrawObject(g);
 		}		
 		g.setColor(Color.BLACK);
-		for(Object_port op : Object_port.port_list) {	
-			g.fillRect(op.x, op.y, op.width, op.height);		
+		for(MyObject_Port op : MyObject_Port.port_list) {	
+			op.DrawObject(g);
 		}
-		for(Line line : Line.line_list) {
-			g.drawLine(line.begin_port.x, line.begin_port.y, line.end_port.x, line.end_port.y);
+		for(MyLine line : GUI.line_list) {
+			g.drawLine(line.begin_port.GetCenterX(), line.begin_port.GetCenterY(), 
+					   line.end_port.GetCenterX(), line.end_port.GetCenterY());
+			line.DrawLine(g);		
 		}
 	}
-	/*
-	public void paintClass(Graphics g) {
-		super.paintComponent(g);
-	}
-	*/
 	
-	public void DrawClass(int x, int y) {
-		repaint();
+	public void DrawAssLine(Graphics g) {
+		
 	}
 	
 	public Rectangle SetRect(int x, int y, int w, int h) {
@@ -101,11 +82,9 @@ public class MyCanvas extends JLayeredPane implements MouseListener, MouseMotion
 	}
 	
 	@Override
-	public void mouseClicked(MouseEvent arg0) {		
-		Mode.mode.CanvasClicked();
+	public void mouseClicked(MouseEvent e) {		
+		MyMode.mode.CanvasClicked(e);
 		repaint();
-		//System.out.println(MouseInfo.getPointerInfo().getLocation());
-		//System.out.println(getMousePosition());
 	}
 
 	@Override
@@ -122,12 +101,11 @@ public class MyCanvas extends JLayeredPane implements MouseListener, MouseMotion
 	public void mousePressed(MouseEvent arg0) {
 		mouse_begin_x = getMousePosition().x;
 		mouse_begin_y = getMousePosition().y;
-		//Mode.mode.CanvasPressed();
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		Mode.mode.CanvasReleased();
+		MyMode.mode.CanvasReleased();
 		mouse_begin_x = 0;
 		mouse_begin_y = 0;
 		mouse_end_x = 0;
@@ -141,7 +119,6 @@ public class MyCanvas extends JLayeredPane implements MouseListener, MouseMotion
 	
 	@Override
 	public void mouseDragged(MouseEvent me) {
-		//Mode.mode.CanvasDragged();
 		mouse_end_x = getMousePosition().x;
 		mouse_end_y = getMousePosition().y;
 		fill_rect.x = Math.min(mouse_begin_x, mouse_end_x);
@@ -149,15 +126,13 @@ public class MyCanvas extends JLayeredPane implements MouseListener, MouseMotion
 		fill_rect.width = Math.abs(mouse_end_x - mouse_begin_x);
 		fill_rect.height = Math.abs(mouse_end_y - mouse_begin_y);
 		
-		//System.out.println("Draggggg");
 		c = Color.CYAN; 
 		repaint();		
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		// System.out.println("Move");
+
 	}
 	
 }
