@@ -6,8 +6,14 @@ import function.mode.MyMode;
 
 public class MyButton_Select extends MyButton {
 	
-	public MyButton_Select(ImageIcon icon) {
-		super(icon);
+	private final int x = 20;
+	private final int y = 60;
+	
+	public MyButton_Select() {
+		this.icon = new ImageIcon("src/material/select.PNG");
+		this.setLocation(this.x, this.y);
+		this.setSize(this.width, this.height);
+		this.setIcon(this.AdjustIconSize(this.icon));
 	}
 
 	@Override

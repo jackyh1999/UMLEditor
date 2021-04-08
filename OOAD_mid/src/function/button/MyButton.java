@@ -4,11 +4,8 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -22,20 +19,12 @@ public abstract class MyButton extends JButton implements ActionListener{
 	private final int icon_height = 50;
 	private int x;
 	private int y;
-	private int width;
-	private int height;
+	protected final int width = 80;
+	protected final int height = 80;
+	protected ImageIcon icon;
 	
-	public MyButton(ImageIcon icon) {
+	public MyButton() {
 		addActionListener(this);
-		/*
-		this.addMouseListener(new MouseAdapter() {	
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				ButtonClicked();
-			}
-		});
-		*/
-		this.setIcon(AdjustIconSize(icon));	
 		button_list.add(this);
 		GUI.main_frame.add(this);		
 		

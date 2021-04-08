@@ -10,11 +10,6 @@ public class MyMode_GeneralizationLine extends MyMode_Line{
 	public void DrawLine(MyLine line) {
 		System.out.println("draw genline.");
 		MyLine genline  = new GeneralizationLine(line);
-		/*
-		genline.begin_port = line.begin_port;
-		genline.end_port = line.end_port;
-		genline.vec = line.vec;
-		*/
-		GUI.line_list.add(genline);
+		MyLine.line_list.add(genline);
 	}
 }

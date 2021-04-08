@@ -16,12 +16,8 @@ import scene.MyCanvas;
 
 public class MyLine {
 	
-	//public static MyLine temp_line = new MyLine();
-	/*
-	public static MyLine association_line = new AssociationLine();
-	public static MyLine composition_line = new CompositionLine();
-	public static MyLine generalization_line = new GeneralizationLine();	
-	*/
+	public static ArrayList<MyLine> line_list = new ArrayList<MyLine>();
+	
 	public int begin_x;
 	public int begin_y;
 	public Point begin;

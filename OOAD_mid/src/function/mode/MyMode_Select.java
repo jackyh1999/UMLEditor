@@ -55,7 +55,6 @@ public class MyMode_Select extends MyMode{
 		for(MyObject mo : MyObject.object_list) {
 			if( IsInSelectRange(mo) )				
 			{
-				System.out.println("Object selected.");
 				mo.Select();
 			}
 		}
@@ -99,7 +98,7 @@ public class MyMode_Select extends MyMode{
 	}
 	
 	public Boolean IsInSelectRange(MyObject mo) {
-		Rectangle r1 = MyCanvas.fill_rect;
+		Rectangle r1 = MyCanvas.range_rect;
 		Rectangle r2 = new Rectangle(mo.GetX(), mo.GetY(), mo.GetWidth(), mo.GetHeight());	
 		if(	r1.contains(r2)	) return true;
 		else return false;		

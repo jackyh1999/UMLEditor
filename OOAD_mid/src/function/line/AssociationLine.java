@@ -6,7 +6,6 @@ import java.awt.Polygon;
 public class AssociationLine extends MyLine{
 	
 	int x1,x2,x3,y1,y2,y3;
-	//Polygon polyline = new Polygon();
 	public AssociationLine(MyLine line) {
 		this.begin_port = line.begin_port;
 		this.end_port = line.end_port;

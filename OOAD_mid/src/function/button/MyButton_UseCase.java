@@ -7,8 +7,14 @@ import function.mode.MyMode_UseCase;
 
 public class MyButton_UseCase extends MyButton{
 
-	public MyButton_UseCase(ImageIcon icon) {
-		super(icon);
+	private final int x = 20;
+	private final int y = 560;
+	
+	public MyButton_UseCase() {
+		this.icon = new ImageIcon("src/material/usecase.PNG");
+		this.setLocation(this.x, this.y);
+		this.setSize(this.width, this.height);
+		this.setIcon(this.AdjustIconSize(this.icon));
 	}
 	
 	@Override

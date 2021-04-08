@@ -6,8 +6,14 @@ import function.mode.MyMode;
 
 public class MyButton_GeneralizationLine extends MyButton{
 
-	public MyButton_GeneralizationLine(ImageIcon icon) {
-		super(icon);
+	private final int x = 20;
+	private final int y = 260;
+	
+	public MyButton_GeneralizationLine() {
+		this.icon = new ImageIcon("src/material/genline.PNG");
+		this.setLocation(this.x, this.y);
+		this.setSize(this.width, this.height);
+		this.setIcon(this.AdjustIconSize(this.icon));
 	}
 	
 	@Override

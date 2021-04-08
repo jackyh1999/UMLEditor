@@ -142,7 +142,6 @@ public class MyObject extends JLabel implements MouseListener, MouseMotionListen
 			mo.x += dist_x;
 			mo.y += dist_y;
 			mo.setLocation(mo.x, mo.y);
-			System.out.println(mo.x + " " + mo.y);
 			MovePort(mo);
 		}
 		else {

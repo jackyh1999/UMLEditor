@@ -1,28 +1,26 @@
 package function.button;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
 import scene.GUI;
 
-public class ChangeNameWindow_Cancel extends JButton{
+public class ChangeNameWindow_Cancel extends JButton implements ActionListener{
 	
 	public ChangeNameWindow_Cancel() {
-		this.addMouseListener(new MouseAdapter() {	
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				CloseWindow();
-				System.out.println("cancel");
-			}
-		});
+		this.addActionListener(this);
 	}
 
 	public void CloseWindow() {
+		GUI.window_textarea.setText("");
 		GUI.change_name_window.setVisible(false);
-		//GUI.change_name_window.setEnabled(false);
+		GUI.change_name_window.setEnabled(false);
 	}
 
-
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		CloseWindow();	
+	}
 }

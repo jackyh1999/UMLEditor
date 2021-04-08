@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -28,66 +27,55 @@ import function.menu.MyMenuItem_ChangeName;
 import function.menu.MyMenuItem_Group;
 import function.menu.MyMenuItem_Ungroup;
 
- 
-
-
 public class GUI {
 	
 	public static JFrame main_frame = new JFrame("UMLEditor");
 	public static MyCanvas main_canvas = new MyCanvas();
 	public static JPanel change_name_window = new JPanel(new FlowLayout());
-	public static JTextArea window_textarea = new JTextArea();
-	
-	private final int main_frame_width = 800;
-	private final int main_frame_height = 700;
+	public static JTextArea window_textarea = new JTextArea();	
 	
 	private JMenuBar bar = new JMenuBar();
-	private final int bar_width = 800;
-	private final int bar_height = 40;
-	
 	private JMenu menu_file = new JMenu("File");
 	private JMenu menu_edit = new JMenu("Edit"); 
 	
 	private JMenuItem item_group = new MyMenuItem_Group();
 	private JMenuItem item_ungroup = new MyMenuItem_Ungroup();
-	private JMenuItem item_changename = new MyMenuItem_ChangeName();
+	private JMenuItem item_changename = new MyMenuItem_ChangeName();	
 	
-	private ImageIcon icon_select = new ImageIcon("src/material/select.PNG");
-	private ImageIcon icon_assline = new ImageIcon("src/material/assline.PNG");
-	private ImageIcon icon_genline = new ImageIcon("src/material/genline.PNG");
-	private ImageIcon icon_compline = new ImageIcon("src/material/compline.PNG");
-	private ImageIcon icon_class = new ImageIcon("src/material/class.PNG");
-	private ImageIcon icon_usecase = new ImageIcon("src/material/usecase.PNG");	
-	
-	
-	private MyButton btn_select = new MyButton_Select(icon_select);
-	private MyButton btn_assline = new MyButton_AssociationLine(icon_assline);
-	private MyButton btn_genline = new MyButton_GeneralizationLine(icon_genline); 
-	private MyButton btn_compline = new MyButton_CompositionLine(icon_compline);
-	private MyButton btn_class = new MyButton_Class(icon_class);
-	private MyButton btn_usecase = new MyButton_UseCase(icon_usecase);
-	
-	private final int button_width = 80;
-	private final int button_height = 80;	
-	
+	private MyButton btn_select = new MyButton_Select();
+	private MyButton btn_assline = new MyButton_AssociationLine();
+	private MyButton btn_genline = new MyButton_GeneralizationLine(); 
+	private MyButton btn_compline = new MyButton_CompositionLine();
+	private MyButton btn_class = new MyButton_Class();
+	private MyButton btn_usecase = new MyButton_UseCase();
+		
 	private JButton cnw_btn_ok = new ChangeNameWindow_OK();
-	private JButton cnw_btn_cancel = new ChangeNameWindow_Cancel();
+	private JButton cnw_btn_cancel = new ChangeNameWindow_Cancel();		
+	
+	private final int main_frame_width = 800;
+	private final int main_frame_height = 700;
+	
+	private final int bar_width = 800;
+	private final int bar_height = 40;
+	
+	private final int main_canvas_x = 120;
+	private final int main_canvas_y = 60;
+	private final int main_canvas_width = 640;
+	private final int main_canvas_height = 580;
+	
+	private final int change_name_window_x = 150;
+	private final int change_name_window_y = 250;
+	private final int change_name_window_width = 250;
+	private final int change_name_window_height = 40;
+	private Dimension window_textarea_size = new Dimension(100, 20);
 	
 	
-	public static ArrayList<MyLine> line_list = new ArrayList<MyLine>();
 	
 	public GUI() {		
 		
 		MainFrameInit();
 		MenuBarInit();
 		MenuInit();
-		
-		ButtonSelectInit();
-		ButtonAsslineInit();
-		ButtonGenlineInit();
-		ButtonComplineInit();
-		ButtonClassInit();
-		ButtonUsecaseInit();
 		MainCanvasInit();
 		ChangeNameWindowInit();
 		
@@ -102,11 +90,7 @@ public class GUI {
 	}
 	
 	private void MenuBarInit() {
-		//bar.setLocation(0, 0);
-		//bar.setBounds(0, 0, bar_width, bar_height);	
-		//bar.setAlignmentY(bar_height);
 		bar.setSize(bar_width, bar_height);
-		//bar.setSize(bar_height, bar_width);
 		bar.add(menu_file);
 		bar.add(menu_edit);
 		
@@ -122,45 +106,20 @@ public class GUI {
 		menu_edit.add(item_ungroup);
 		menu_edit.add(item_changename);
 	}
-	
-	private void ButtonSelectInit() {
-		btn_select.setBounds(20,60,button_width,button_height);
-		//btn_select.setLocation(button_x, button_y);
-	}
-	
-	private void ButtonAsslineInit() {
-		btn_assline.setBounds(20,160,button_width,button_height);
-	}
-	
-	private void ButtonGenlineInit() {
-		btn_genline.setBounds(20,260,button_width,button_height);
-	}
-	
-	private void ButtonComplineInit() {
-		btn_compline.setBounds(20,360,button_width,button_height);
-	}
-	
-	private void ButtonClassInit() {
-		btn_class.setBounds(20,460,button_width,button_height);
-	}
-	
-	private void ButtonUsecaseInit() {
-		btn_usecase.setBounds(20,560,button_width,button_height);
-	}
-	
+		
 	private void MainCanvasInit() {
-		main_canvas.setLocation(120, 60);
-		main_canvas.setSize(640, 580);
+		main_canvas.setLocation(main_canvas_x, main_canvas_y);
+		main_canvas.setSize(main_canvas_width, main_canvas_height);
 		main_canvas.setBackground(Color.WHITE);
 		main_canvas.setOpaque(true);
 	}	
 	
 	private void ChangeNameWindowInit() {
 		
-		change_name_window.setLocation(150, 250);
-		change_name_window.setSize(250, 40);
-		change_name_window.setBackground(Color.LIGHT_GRAY);
-		window_textarea.setPreferredSize(new Dimension(100, 20));
+		change_name_window.setLocation(change_name_window_x, change_name_window_y);
+		change_name_window.setSize(change_name_window_width, change_name_window_height);
+		change_name_window.setBackground(Color.GRAY);
+		window_textarea.setPreferredSize(window_textarea_size);
 		cnw_btn_ok.setText("OK");
 		cnw_btn_cancel.setText("Cancel");
 		change_name_window.add(window_textarea);
@@ -169,10 +128,7 @@ public class GUI {
 		change_name_window.add(cnw_btn_cancel);
 		change_name_window.setVisible(false);
 		change_name_window.setEnabled(false);
-		main_canvas.add(change_name_window);
+		main_canvas.add(change_name_window, 100, 0);
 	}
-		
-	public JFrame GetFrame() {
-		return this.main_frame;
-	}
+
 }

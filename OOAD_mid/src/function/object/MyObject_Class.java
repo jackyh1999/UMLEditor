@@ -27,14 +27,12 @@ public class MyObject_Class extends MyObject implements MouseListener, MouseMoti
 		this.center_y = this.y + this.height/2;
 		this.gap = this.height / this.class_num;
 		this.layer = MyCanvas.object_layer++;
-		//this.center = new Point(this.center_x, this.center_y);
 		this.setLocation(this.x, this.y);
 		this.setSize(this.width, this.height);
 		this.addMouseListener(this);	
 		this.addMouseMotionListener(this);
 		this.CreatePort();		
-		MyObject.object_list.add(this);
-		//GUI.main_canvas.DrawClass(this.x, this.y);		
+		MyObject.object_list.add(this);		
 		GUI.main_canvas.add(this, this.layer, 0);
 	}
 	

@@ -1,5 +1,6 @@
 package function.object;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -67,8 +68,7 @@ public class MyObject_Port extends MyObject{
 	
 	@Override
 	public void DrawObject(Graphics g) {
-		//System.out.println(this.x + " " + this.y + " " + this.width + " " + this.height);
-		g.fillRect(this.x, this.y, this.width, this.height);		
-		//g.fillRect(op.GetX(), op.GetY(), op.GetWidth(), op.GetHeight());		
+		g.setColor(Color.BLACK);
+		g.fillRect(this.x, this.y, this.width, this.height);			
 	}
 }
