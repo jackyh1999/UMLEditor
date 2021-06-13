@@ -2,8 +2,16 @@ package mode;
 
 import java.awt.event.MouseEvent;
 
+import model.object.BaseObject;
+import model.object.ClassType;
+import scene.Canvas;
+
 public class ClassMode extends Mode{
 	
+	@Override
+	public void handleCanvasClicked(MouseEvent e) {
+		Canvas.getInstance().getObjectList().add(new BaseObject(e.getX(), e.getY(), new ClassType()));
+	}
 	/*
 	private static Mode classMode;
 	

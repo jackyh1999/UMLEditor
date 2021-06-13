@@ -5,11 +5,27 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class UseCase extends ObjectType{
+public class UseCaseType extends ObjectType{
 
-	private final int w = 150;
-	private final int h = 100;
+	//private int width = 150;
+	//private int height = 100;
 		
+	public UseCaseType() {
+		this.width = 150;
+		this.height = 100;
+	}
+	
+	@Override
+	public void draw(int x, int y, Graphics g) {
+		
+		g.setColor(Color.LIGHT_GRAY);
+		g.fillOval(x, y, width, height);
+		
+		g.setColor(Color.BLACK);
+		g.drawOval(x, y, width, height);
+		
+		g.drawString(name, x + width/2 - name.length()*font, y + font);	
+	}
 	/*
 	public UseCase(int x, int y) {
 

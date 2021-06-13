@@ -28,15 +28,10 @@ public class UMLEditor extends JFrame{
 	
 	private final int width = 800;
 	private final int height = 700;
+	private final String title = "UMLEditor";
 	
 	private JMenuBar menuBar;
 	private List<FunctionButton> btnList;
-	private JButton btnSelect;
-	private JButton btnAssociation;
-	private JButton btnGeneralization; 
-	private JButton btnComposition;
-	private JButton btnClass;
-	private JButton btnUseCase;
 	
 	private int btnNum;
 	
@@ -71,41 +66,45 @@ public class UMLEditor extends JFrame{
 	private Dimension window_textarea_size = new Dimension(100, 20);
 	
 	*/
+	private static UMLEditor umlEditor;
 	
-	public UMLEditor(String s) {
-		
-		super(s);
-		
-		
-		
+	private UMLEditor() {
+			
 		menuBar = new MyMenuBar();
 		
 		btnNum = 0;
 		btnList = new ArrayList<FunctionButton>();
-		btnSelect = new FunctionButton(btnNum++, new ImageIcon("src/material/select.PNG"), new SelectMode());
-		btnAssociation = new FunctionButton(btnNum++, new ImageIcon("src/material/assline.PNG"), new AssociationMode());
-		btnGeneralization = new FunctionButton(btnNum++, new ImageIcon("src/material/genline.PNG"), new GeneralizationMode()); 
-		btnComposition = new FunctionButton(btnNum++, new ImageIcon("src/material/compline.PNG"), new CompositionMode());
-		btnClass = new FunctionButton(btnNum++, new ImageIcon("src/material/class.PNG"), new ClassMode());
-		btnUseCase = new FunctionButton(btnNum++, new ImageIcon("src/material/usecase.PNG"), new UseCaseMode());
+		btnList.add( new FunctionButton(btnNum++, new ImageIcon("src/material/select.PNG"),   new SelectMode()) );
+		btnList.add( new FunctionButton(btnNum++, new ImageIcon("src/material/assline.PNG"),  new AssociationMode()) );
+		btnList.add( new FunctionButton(btnNum++, new ImageIcon("src/material/genline.PNG"),  new GeneralizationMode()) ); 
+		btnList.add( new FunctionButton(btnNum++, new ImageIcon("src/material/compline.PNG"), new CompositionMode()) );
+		btnList.add( new FunctionButton(btnNum++, new ImageIcon("src/material/class.PNG"),    new ClassMode()) );
+		btnList.add( new FunctionButton(btnNum++, new ImageIcon("src/material/usecase.PNG"),  new UseCaseMode()) );
 		
 		canvas = Canvas.getInstance();
 		
 		this.add(menuBar);
-		
-		this.add(btnSelect);
-		this.add(btnAssociation);
-		this.add(btnGeneralization);
-		this.add(btnComposition);
-		
-		
+		for( FunctionButton btn : btnList) this.add(btn);
 		this.add(canvas);
 		
+		this.setTitle(title);
 		this.setSize(width, height);
 		this.setResizable(false);
 		this.setLayout(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
+	}
+	
+	public static UMLEditor getInstance() {
+		if(umlEditor == null) umlEditor = new UMLEditor();
+		return umlEditor;
+	}
+	
+	public void changeButtonColor(FunctionButton btnClicked) {
+		for( FunctionButton btn : btnList ) {
+			if(btn.equals(btnClicked)) btn.setBackground(Color.GRAY);
+			else btn.setBackground(null);			
+		}	
 	}
 	
 	/*

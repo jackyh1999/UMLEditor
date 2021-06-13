@@ -5,7 +5,73 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.object.MyObject;
+import scene.Canvas;
+
 public class SelectMode extends Mode{	
+	
+	boolean selectRange;
+	private int selectRangeX;
+	private int selectRangeY;
+	
+	@Override
+	public void handleCanvasClicked(MouseEvent e) {
+		unSelect();
+		MyObject obj = chooseObject(e.getX(), e.getY());
+		if(obj != null) {
+			obj.setSelect(true);
+		}
+	}
+	
+	@Override
+	public void handleCanvasPressed(MouseEvent e) {
+		MyObject obj = chooseObject(e.getX(), e.getY());
+		if(obj == null) {
+			selectRange = true;
+			selectRangeX = e.getX();
+			selectRangeY = e.getY();
+			Rectangle r = new Rectangle(selectRangeX, selectRangeY, 0, 0);
+			Canvas.getInstance().setSelectRange(r);
+		}
+	}
+	
+	@Override
+	public void handleCanvasDragged(MouseEvent e) {
+		if(selectRange) {
+			int x = Math.min(selectRangeX, e.getX());
+			int y = Math.min(selectRangeY, e.getY());
+			int width = Math.abs(selectRangeX - e.getX());
+			int height = Math.abs(selectRangeY - e.getY());
+			Rectangle r = new Rectangle(x, y, width, height);
+			Canvas.getInstance().setSelectRange(r);
+		}
+	}
+	
+	@Override
+	public void handleCanvasReleased(MouseEvent e) {
+		if(selectRange) {	
+			unSelect();
+			int x = Math.min(selectRangeX, e.getX());
+			int y = Math.min(selectRangeY, e.getY());
+			int width = Math.abs(selectRangeX - e.getX());
+			int height = Math.abs(selectRangeY - e.getY());
+			Rectangle r = new Rectangle(x, y, width, height);
+			for(MyObject obj : Canvas.getInstance().getObjectList()) {
+				if(obj.isInside(r)) obj.setSelect(true);
+			}
+			//selectRangeX = 0;
+			//selectRangeY = 0;
+			r = new Rectangle(0, 0, 0, 0);
+			Canvas.getInstance().setSelectRange(r);
+			selectRange = false;
+		}
+	}
+	
+	private void unSelect() {
+		for(MyObject obj : Canvas.getInstance().getObjectList()) {
+			obj.setSelect(false);
+		}
+	}
 	
 	/*
 	private static Mode selectMode;

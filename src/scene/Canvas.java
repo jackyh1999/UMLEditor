@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLayeredPane;
@@ -13,27 +14,33 @@ import javax.swing.JPanel;
 
 import mode.Mode;
 import model.line.Line;
+import model.object.MyObject;
 
-public class Canvas extends JPanel{
+public class Canvas extends JPanel implements MouseListener, MouseMotionListener{
  
 	private static Canvas canvas; 
 	
-	private List<Object> objectList;
+	
+	private List<MyObject> objectList;
 	private List<Line> lineList;
 	private Mode currentMode;
-	private CanvasMouseEvent cme;
 	
 	private final int x = 120;
 	private final int y = 60;
 	private final int width = 640;
 	private final int height = 580;
 		
+	private int selectRangeX = 0;
+	private int selectRangeY = 0;
+	private int selectRangeWidth = 0;
+	private int selectRangeHeight = 0;
+	private Rectangle selectRange;
 	/*
 	public static int object_layer = 0;	
 	public final static int canvas_x = 128;
 	public final static int canvas_y = 91;
 	
-	public static Rectangle range_rect = new Rectangle();
+	
 	
 	private int mouse_begin_x;
 	private int mouse_begin_y;
@@ -44,16 +51,19 @@ public class Canvas extends JPanel{
 	
 	private Canvas() {
 		//GUI.main_frame.add(this);
-		cme = new CanvasMouseEvent();
+		
+		objectList = new ArrayList<MyObject>();
+		lineList = new ArrayList<Line>();
+		selectRange = new Rectangle();
 		
 		this.setLocation(x, y);
 		this.setSize(width, height);
 		this.setBackground(Color.WHITE);
 		//this.setOpaque(true);
 		this.setVisible(true);
-		this.addMouseListener(cme);
-		this.addMouseMotionListener(cme);
-		System.out.println("Canvas created");
+		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
+		//System.out.println("Canvas created");
 	}
 	
 	public static Canvas getInstance() {
@@ -69,12 +79,28 @@ public class Canvas extends JPanel{
 	
 	public void setCurrentMode(Mode mode) {
 		currentMode = mode;
+		System.out.println("Current mode: " + mode.getClass().getSimpleName());
+	}
+	
+	public List<MyObject> getObjectList(){
+		return objectList;
+	}
+	
+	public List<Line> getLineList(){
+		return lineList;
 	}
 	
 	@Override
 	public void paintComponent(Graphics g) {
+		
 		super.paintComponent(g);
-
+		g.setColor(Color.CYAN);
+		g.fillRect(selectRange.x, selectRange.y, selectRange.width, selectRange.height);
+		
+		for(MyObject obj : objectList) obj.draw(g);
+		for(Line line : lineList) line.draw(g);
+		
+		// for(Line line : lineList) line.Draw(g);
 		//DrawSelectRange(g);
 						
 		/*
@@ -99,10 +125,85 @@ public class Canvas extends JPanel{
 		*/
 		
 	}
-	
+	/*
 	public Rectangle SetRect(int x, int y, int w, int h) {
 		Rectangle temp = new Rectangle(x, y, w, h);
 		return temp;
+	}
+	 */
+	
+	public void setSelectRangeX(int x) {
+		selectRangeX = x;
+	}
+	
+	public void setSelectRangeY(int y) {
+		selectRangeY = y;
+	}
+	
+	public void setSelectRangeWidth(int width) {
+		selectRangeWidth = width;
+	}
+
+	public void setSelectRangeHeight(int height) {
+		selectRangeHeight = height;
+	}
+	
+	public void setSelectRange(Rectangle r) {
+		selectRange = r;
+	}
+	
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		currentMode.handleCanvasDragged(e);
+		repaint();
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		currentMode.handleCanvasClicked(e);
+		repaint();
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		currentMode.handleCanvasPressed(e);
+		repaint();
+		//System.out.println("handle mouse pressed");
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		currentMode.handleCanvasReleased(e);
+		repaint();
+	}
+	
+	public MyObject chooseObject(int x, int y) {
+		
+		for(int depth = objectList.size()-1; depth >= 0; depth--) {
+			if( objectList.get(depth).isContain(x,y) ) {
+				return objectList.get(depth);
+			}
+		}
+		return null;
 	}
 	
 	/*

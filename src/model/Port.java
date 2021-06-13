@@ -6,15 +6,27 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import model.line.Line;
+import model.object.BaseObject;
 
 public class Port{
 	
+
 	public static ArrayList<Port> port_list = new ArrayList<Port>();
 	
-	private final int width = 10;
-	private final int height = 10;
+	protected int x;
+	protected int y;
+	protected int width = 10;
+	protected int height = 10;
 	
 	public ArrayList<Line> connected_list = new ArrayList<Line>();
+	
+	public Port() {
+		
+	}
+	/*
+	public Port(int x, int y, int width, int height) {
+		
+	}
 	
 	public Port(Object obj, int type) {
 		
@@ -38,42 +50,40 @@ public class Port{
 		this.layer = obj.layer;
 		//System.out.println(this.x + " " + this.y);
 		GUI.main_canvas.add(this, this.layer, 0);
-		*/
-	}
-	
-	/*
-	public void UpPort(MyObject obj) {
 		
-		this.x = obj.center_x - this.width/2;
-		this.y = obj.y - this.height;
+	}
+    */
+	public int getX() {
+		// TODO Auto-generated method stub
+		return x;
+	}
+
+	public int getY() {
+		// TODO Auto-generated method stub
+		return y;
 	}
 	
-	public void RightPort(MyObject obj) {
-		this.x = obj.x + obj.width;
-		this.y = obj.center_y - this.height/2;
-	}
-	
-	public void DownPort(MyObject obj) {
-		this.x = obj.center_x - this.width/2;
-		System.out.println( obj.height );
-		this.y = obj.y + obj.height;
-	}
-	
-	public void LeftPort(MyObject obj) {
-		this.x = obj.x - this.width;
-		this.y = obj.center_y - this.height/2;
-	}
-	
-	
-	
-	public Point GetCenter() {
-		return new Point(this.x + this.width/2, this.y + this.height/2);
-	}
-	
-	@Override
-	public void DrawObject(Graphics g) {
+	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(this.x, this.y, this.width, this.height);			
+		g.fillRect(x, y, width, height);
 	}
-	*/
+
+	public int getWidth() {
+		// TODO Auto-generated method stub
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+	
+	public int getConnectionX() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	public int getConnectionY() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

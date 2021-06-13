@@ -27,6 +27,11 @@ public class Line {
 	
 	public double[] vec = new double[2];
 	
+	private int startX;
+	private int startY;
+	private int endX;
+	private int endY;
+	private LineType lineType;
 	/*
 	public void BeginRecord(MyObject mo, MouseEvent e) {
 		begin_x = MouseInfo.getPointerInfo().getLocation().x - MyCanvas.canvas_x;
@@ -74,6 +79,15 @@ public class Line {
 	}
 	*/
 	
+	public Line(int startX, int startY, int endX, int endY, LineType lineType) {
+		this.startX = startX;
+		this.startY = startY;
+		this.endX = endX;
+		this.endY = endY;
+		this.lineType = lineType;
+		System.out.println("new line");
+	}
+
 	public void CreateLine() {
 		CalculateSlope();
 		//this.begin_port.connected_list.add(this);
@@ -94,7 +108,13 @@ public class Line {
 		vec[1] = j ;
 	}
 	
-	public void DrawLine(Graphics g) {
+	public void setEndPoint(int x, int y) {
+		this.endX = x;
+		this.endY = y;
 		
+	}
+
+	public void draw(Graphics g) {
+		g.drawLine(startX, startY, endX, endY);
 	}
 }

@@ -7,7 +7,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
 public class MyMenuBar extends JMenuBar{
-	
+		
+	private final int x = 0;
+	private final int y = 0;
 	private final int width = 800;
 	private final int height = 40;
 	
@@ -17,12 +19,13 @@ public class MyMenuBar extends JMenuBar{
 	
 	public MyMenuBar() {
 		
-		menuList = new ArrayList<JMenu>();
+		this.setSize(width, height);
+		this.setLocation(x, y);
 		
-		JMenu file = new FileMenu();
-		JMenu edit = new EditMenu();
+		menuList = new ArrayList<JMenu>();	
+		menuList.add(new FileMenu());
+		menuList.add(new EditMenu());
 		
-		menuList.add(file);
-		menuList.add(edit);
+		for(JMenu menu : menuList) this.add(menu);
 	}
 }
