@@ -1,17 +1,15 @@
 package scene;
 
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import mode.Mode;
 
-public class FunctionButton extends JButton implements ActionListener{
+public class ModeButton extends JButton implements ActionListener{
 	
 	private final int btnInitX = 20;
 	private final int btnInitY = 60;
@@ -24,7 +22,7 @@ public class FunctionButton extends JButton implements ActionListener{
 
 	private Mode mode;
 	
-	public FunctionButton(int n, ImageIcon imgIcon, Mode mode) {
+	public ModeButton(int n, ImageIcon imgIcon, Mode mode) {
 		this.setSize(width, height);
 		this.setLocation(btnInitX, btnInitY + btnGapY * n);
 		this.setIcon( adjustIconSize(imgIcon) );

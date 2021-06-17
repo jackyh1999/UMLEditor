@@ -16,6 +16,8 @@ public class UseCaseMode extends Mode{
 	*/
 	@Override
 	public void handleCanvasClicked(MouseEvent e) {
-		Canvas.getInstance().getObjectList().add(new BaseObject(e.getX(), e.getY(), new UseCaseType()));
+		BaseObject obj = new BaseObject(e.getX(), e.getY(), new UseCaseType());
+		Canvas.getInstance().getObjectList().add(obj);
+		Canvas.getInstance().getLayers().add(obj);
 	}
 }

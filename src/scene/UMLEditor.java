@@ -1,5 +1,6 @@
 package scene;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -14,6 +15,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.OverlayLayout;
 
 import mode.AssociationMode;
 import mode.ClassMode;
@@ -31,38 +33,14 @@ public class UMLEditor extends JFrame{
 	private final String title = "UMLEditor";
 	
 	private JMenuBar menuBar;
-	private List<FunctionButton> btnList;
+	private List<ModeButton> btnList;
 	
 	private int btnNum;
 	
-	private Canvas canvas;
-	private static JPanel changeNameWindow = new JPanel(new FlowLayout());
+	private JPanel canvas;
+	private JPanel changeNameWindow;
 	/*
-	
-	public static JTextArea window_textarea = new JTextArea();	
-	
-	
-	private JMenu menu_file = new JMenu("File");
-	private JMenu menu_edit = new JMenu("Edit"); 
-	
-	private JMenuItem item_group = new MyMenuItem_Group();
-	private JMenuItem item_ungroup = new MyMenuItem_Ungroup();
-	private JMenuItem item_changename = new MyMenuItem_ChangeName();	
-	
-	private MyButton btn_select = new MyButton_Select();
-	private MyButton btn_assline = new MyButton_AssociationLine();
-	private MyButton btn_genline = new MyButton_GeneralizationLine(); 
-	private MyButton btn_compline = new MyButton_CompositionLine();
-	private MyButton btn_class = new MyButton_Class();
-	private MyButton btn_usecase = new MyButton_UseCase();
-		
-	private JButton cnw_btn_ok = new ChangeNameWindow_OK();
-	private JButton cnw_btn_cancel = new ChangeNameWindow_Cancel();		
-	
-	private final int change_name_window_x = 150;
-	private final int change_name_window_y = 250;
-	private final int change_name_window_width = 250;
-	private final int change_name_window_height = 40;
+
 	private Dimension window_textarea_size = new Dimension(100, 20);
 	
 	*/
@@ -73,19 +51,25 @@ public class UMLEditor extends JFrame{
 		menuBar = new MyMenuBar();
 		
 		btnNum = 0;
-		btnList = new ArrayList<FunctionButton>();
-		btnList.add( new FunctionButton(btnNum++, new ImageIcon("src/material/select.PNG"),   new SelectMode()) );
-		btnList.add( new FunctionButton(btnNum++, new ImageIcon("src/material/assline.PNG"),  new AssociationMode()) );
-		btnList.add( new FunctionButton(btnNum++, new ImageIcon("src/material/genline.PNG"),  new GeneralizationMode()) ); 
-		btnList.add( new FunctionButton(btnNum++, new ImageIcon("src/material/compline.PNG"), new CompositionMode()) );
-		btnList.add( new FunctionButton(btnNum++, new ImageIcon("src/material/class.PNG"),    new ClassMode()) );
-		btnList.add( new FunctionButton(btnNum++, new ImageIcon("src/material/usecase.PNG"),  new UseCaseMode()) );
+		btnList = new ArrayList<ModeButton>();
+		btnList.add( new ModeButton(btnNum++, new ImageIcon("src/material/select.PNG"),   new SelectMode()) );
+		btnList.add( new ModeButton(btnNum++, new ImageIcon("src/material/assline.PNG"),  new AssociationMode()) );
+		btnList.add( new ModeButton(btnNum++, new ImageIcon("src/material/genline.PNG"),  new GeneralizationMode()) ); 
+		btnList.add( new ModeButton(btnNum++, new ImageIcon("src/material/compline.PNG"), new CompositionMode()) );
+		btnList.add( new ModeButton(btnNum++, new ImageIcon("src/material/class.PNG"),    new ClassMode()) );
+		btnList.add( new ModeButton(btnNum++, new ImageIcon("src/material/usecase.PNG"),  new UseCaseMode()) );
 		
 		canvas = Canvas.getInstance();
+		changeNameWindow = ChangeNameWindow.getInstance();
+		
+		//overlay = new JPanel();
+		//overlay.setLayout(new OverlayLayout(overlay));
 		
 		this.add(menuBar);
-		for( FunctionButton btn : btnList) this.add(btn);
+		for( ModeButton btn : btnList) this.add(btn);
+		this.add(changeNameWindow);
 		this.add(canvas);
+		//this.add(overlay);
 		
 		this.setTitle(title);
 		this.setSize(width, height);
@@ -100,48 +84,13 @@ public class UMLEditor extends JFrame{
 		return umlEditor;
 	}
 	
-	public void changeButtonColor(FunctionButton btnClicked) {
-		for( FunctionButton btn : btnList ) {
+	public void changeButtonColor(ModeButton btnClicked) {
+		for( ModeButton btn : btnList ) {
 			if(btn.equals(btnClicked)) btn.setBackground(Color.GRAY);
 			else btn.setBackground(null);			
 		}	
 	}
-	
 	/*
-	public UMLEditor() {		
-		
-		MainFrameInit();
-		MenuBarInit();
-		MenuInit();
-		MainCanvasInit();
-		ChangeNameWindowInit();
-		
-	}
-	
-	private void MainFrameInit(){
-		main_frame.setSize(main_frame_width, main_frame_height);
-		main_frame.setResizable(false);
-		main_frame.setLayout(null);
-		main_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
-        main_frame.setVisible(true);
-	}
-	
-	private void MenuInit() {
-		item_group.setText("Group");
-		item_ungroup.setText("UnGroup");
-		item_changename.setText("Change object name");
-		
-		menu_edit.add(item_group);
-		menu_edit.add(item_ungroup);
-		menu_edit.add(item_changename);
-	}
-		
-	private void MainCanvasInit() {
-		main_canvas.setLocation(main_canvas_x, main_canvas_y);
-		main_canvas.setSize(main_canvas_width, main_canvas_height);
-		main_canvas.setBackground(Color.WHITE);
-		main_canvas.setOpaque(true);
-	}	
 	
 	private void ChangeNameWindowInit() {
 		

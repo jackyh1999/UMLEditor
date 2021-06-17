@@ -2,74 +2,40 @@ package model;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.line.Line;
-import model.object.BaseObject;
 
-public class Port{
-	
-
-	public static ArrayList<Port> port_list = new ArrayList<Port>();
+public abstract class Port{
 	
 	protected int x;
 	protected int y;
-	protected int width = 10;
-	protected int height = 10;
+	protected int width;
+	protected int height;
 	
-	public ArrayList<Line> connected_list = new ArrayList<Line>();
+	private List<Line> lines;
 	
 	public Port() {
-		
-	}
-	/*
-	public Port(int x, int y, int width, int height) {
-		
-	}
-	
-	public Port(Object obj, int type) {
-		
-		/*
-		switch(type) {
-		case 0:
-			UpPort(obj); break;
-		case 1:
-			RightPort(obj); break;
-		case 2:
-			DownPort(obj); break;
-		case 3:
-			LeftPort(obj); break;
-		}
-		
-		this.center_x = this.x + this.width/2;
-		this.center_y = this.y + this.height/2;
-		this.center = new Point(this.center_x, this.center_y);	
-		this.setLocation(this.x, this.y);
-		this.setSize(this.width, this.height);
-		this.layer = obj.layer;
-		//System.out.println(this.x + " " + this.y);
-		GUI.main_canvas.add(this, this.layer, 0);
-		
-	}
-    */
-	public int getX() {
-		// TODO Auto-generated method stub
-		return x;
-	}
-
-	public int getY() {
-		// TODO Auto-generated method stub
-		return y;
+		width = 10;
+		height = 10;
+		lines = new ArrayList<Line>();
 	}
 	
 	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(x, y, width, height);
 	}
+	
+	public int getX() {
+		return x;
+	}
 
+	public int getY() {
+		return y;
+	}
+	
 	public int getWidth() {
-		// TODO Auto-generated method stub
 		return width;
 	}
 	
@@ -77,13 +43,17 @@ public class Port{
 		return height;
 	}
 	
-	public int getConnectionX() {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<Line> getLineList(){
+		return lines;
 	}
 	
-	public int getConnectionY() {
-		// TODO Auto-generated method stub
-		return 0;
+	public abstract int getConnectionX();
+	
+	public abstract int getConnectionY();
+	
+	public void move(int translateX, int translateY) {
+		x += translateX;
+		y += translateY;
+		for(Line line : lines) line.move(this);
 	}
 }

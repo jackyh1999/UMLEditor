@@ -6,6 +6,7 @@ public class UpPort extends Port {
 
 	
 	public UpPort(int x, int y, int width, int height) {
+		super();
 		this.x = x + width/2 - this.width/2;
 		this.y = y - this.height;
 	}

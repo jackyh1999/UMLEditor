@@ -5,177 +5,109 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.ObjectController;
 import model.object.MyObject;
 import scene.Canvas;
 
 public class SelectMode extends Mode{	
-	
-	boolean selectRange;
-	private int selectRangeX;
-	private int selectRangeY;
-	
-	@Override
-	public void handleCanvasClicked(MouseEvent e) {
-		unSelect();
-		MyObject obj = chooseObject(e.getX(), e.getY());
-		if(obj != null) {
-			obj.setSelect(true);
-		}
-	}
+
+	private MyObject obj;
+	private boolean drag;
+	private int pressedX;
+	private int pressedY;
+	private int currX;
+	private int currY;
 	
 	@Override
 	public void handleCanvasPressed(MouseEvent e) {
-		MyObject obj = chooseObject(e.getX(), e.getY());
-		if(obj == null) {
-			selectRange = true;
-			selectRangeX = e.getX();
-			selectRangeY = e.getY();
-			Rectangle r = new Rectangle(selectRangeX, selectRangeY, 0, 0);
-			Canvas.getInstance().setSelectRange(r);
-		}
+		
+		// 若選取到物件，則記錄該物件
+		// 紀錄當前滑鼠座標
+		currX = pressedX = e.getX();
+		currY = pressedY = e.getY();
+		obj = chooseObject(pressedX, pressedY);
 	}
 	
 	@Override
 	public void handleCanvasDragged(MouseEvent e) {
-		if(selectRange) {
-			int x = Math.min(selectRangeX, e.getX());
-			int y = Math.min(selectRangeY, e.getY());
-			int width = Math.abs(selectRangeX - e.getX());
-			int height = Math.abs(selectRangeY - e.getY());
-			Rectangle r = new Rectangle(x, y, width, height);
+		
+		drag = true;
+		
+		// 根據Press時的狀態，決定要選取還是移動
+		// 選取: 讓Canvas繪製選取框
+		if(obj == null) {
+			Rectangle r = calculateSelectRange(e.getX(),e.getY());
 			Canvas.getInstance().setSelectRange(r);
+		}
+		
+		// 移動: 移動Press到的物件
+		else {
+			obj.move(e.getX()-currX, e.getY()-currY);
+			currX = e.getX();
+			currY = e.getY();
 		}
 	}
 	
 	@Override
 	public void handleCanvasReleased(MouseEvent e) {
-		if(selectRange) {	
-			unSelect();
-			int x = Math.min(selectRangeX, e.getX());
-			int y = Math.min(selectRangeY, e.getY());
-			int width = Math.abs(selectRangeX - e.getX());
-			int height = Math.abs(selectRangeY - e.getY());
-			Rectangle r = new Rectangle(x, y, width, height);
-			for(MyObject obj : Canvas.getInstance().getObjectList()) {
-				if(obj.isInside(r)) obj.setSelect(true);
+		
+		// 根據Press和Drag的狀態，決定Release的行為
+		// 沒有Press到物件
+		if(obj == null) {
+			// 有Drag行為，表示進行範圍選取
+			if(drag) {
+				drag = false;
+				unSelectAll();
+				
+				Rectangle r = calculateSelectRange(e.getX(),e.getY());
+				for(MyObject obj : Canvas.getInstance().getObjectList()) {
+					if(obj.isInside(r)) select(obj);
+				}
+				
+				r = new Rectangle(0, 0, 0, 0);
+				Canvas.getInstance().setSelectRange(r);
 			}
-			//selectRangeX = 0;
-			//selectRangeY = 0;
-			r = new Rectangle(0, 0, 0, 0);
-			Canvas.getInstance().setSelectRange(r);
-			selectRange = false;
+			// 沒有Drag行為，表示取消選取
+			else {
+				unSelectAll();
+			}
+		}
+		// 有Press到物件
+		else {
+			// 有Drag行為，表示移動結束
+			if(drag) {
+				drag = false;
+			}
+			// 沒有Drag行為，表示選取單一物件
+			else {
+				unSelectAll();
+				select(obj);
+			}
 		}
 	}
 	
-	private void unSelect() {
-		for(MyObject obj : Canvas.getInstance().getObjectList()) {
+	// 選取單一物件，並將該物件加入selected list當中
+	private void select(MyObject obj) {
+		obj.setSelect(true);
+		ObjectController.getInstance().getSelectedList().add(obj);
+	}
+	
+	// 取消選取所有物件，並將selected list清空
+	private void unSelectAll() {
+		for(MyObject obj : ObjectController.getInstance().getSelectedList()) {
 			obj.setSelect(false);
 		}
+		ObjectController.getInstance().getSelectedList().clear();
 	}
 	
-	/*
-	private static Mode selectMode;
-	
-	private SelectMode() {
-		
+	// 計算選取框的大小
+	private Rectangle calculateSelectRange(int currX, int currY) {
+		int x = Math.min(pressedX, currX);
+		int y = Math.min(pressedY, currY);
+		int width = Math.abs(pressedX - currX);
+		int height = Math.abs(pressedY - currY);
+		Rectangle r = new Rectangle(x, y, width, height);
+		return r;
 	}
 	
-	public static Mode getInstance() {
-		if(selectMode == null) selectMode = new SelectMode();
-		return selectMode;
-	}
-	*/
-	
-	/*
-	public static List<MyObject> selected_list = new ArrayList<MyObject>();
-	int mouse_begin_x;
-	int mouse_begin_y;
-	
-	@Override
-	public void Initialize() {
-		
-	}
-	
-	@Override 
-	public void CanvasClicked(MouseEvent e) {
-		Unselect();
-	}
-	
-	@Override
-	public void ObjectClicked(MyObject mo, MouseEvent e) {
-		Unselect();
-		mo.Select();			
-	}
-	
-	@Override
-	public void ObjectPressed(MyObject mo, MouseEvent e) {
-		mo.StartMove();
-	}
-	
-	@Override
-	public void ObjectDragged(MyObject mo) {
-		mo.Move();
-		GUI.main_canvas.repaint();
-	}
-	
-	@Override
-	public void ObjectReleased(MyObject mo, MouseEvent e) {
-		GUI.main_canvas.repaint();
-	}
-	
-	@Override
-	public void CanvasReleased() {
-		Unselect();
-		for(MyObject mo : MyObject.object_list) {
-			if( IsInSelectRange(mo) )				
-			{
-				mo.Select();
-			}
-		}
-		
-	}
-		
-	public void Unselect() {
-		for(MyObject_Port p : MyObject_Port.port_list) {
-			p.setEnabled(false);
-		}
-		MyObject_Port.port_list.clear();
-		selected_list.clear();
-	}
-	
-	@Override
-	public void Group() {
-		MyObject_CompositeObject oc = new MyObject_CompositeObject();
-		for(MyObject mo : selected_list) {
-			mo.group = oc;
-			oc.member_list.add(mo);
-			MyObject.object_list.remove(oc);
-		}
-		selected_list.clear();
-	}
-	
-	@Override
-	public void UnGroup() {
-		MyObject grouped_object = selected_list.get(0);
-		MyObject.object_list.remove(grouped_object);
-		for(MyObject mo : grouped_object.member_list) {
-			mo.group = null;
-			MyObject.object_list.add(mo);
-		}
-		selected_list.remove(0);
-	}
-	
-	
-	public void ChangeName() {	
-		GUI.change_name_window.setVisible(true);
-		GUI.change_name_window.setEnabled(true);	
-	}
-	
-	public Boolean IsInSelectRange(MyObject mo) {
-		Rectangle r1 = MyCanvas.range_rect;
-		Rectangle r2 = new Rectangle(mo.GetX(), mo.GetY(), mo.GetWidth(), mo.GetHeight());	
-		if(	r1.contains(r2)	) return true;
-		else return false;		
-	}
-	*/
 }

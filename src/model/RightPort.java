@@ -5,6 +5,7 @@ import model.object.BaseObject;
 public class RightPort extends Port{
 
 	public RightPort(int x, int y, int width, int height) {
+		super();
 		this.x = x + width;
 		this.y = y + height/2 - this.height/2;
 	}
