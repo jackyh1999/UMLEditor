@@ -2,7 +2,6 @@ package scene;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -33,8 +32,7 @@ public class ChangeNameWindow extends JPanel{
 		cancel = new JButton("Cancel");
 		
 		textField.setPreferredSize(new Dimension(100, 30));
-		
-		//ok.setLocation(x, y);;
+
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ObjectController.getInstance().changeName(textField.getText());

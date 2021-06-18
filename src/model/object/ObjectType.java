@@ -9,7 +9,7 @@ public abstract class ObjectType {
 	protected int width;
 	protected int height;
 	protected String name = "";
-	protected final Font font = new Font(null,Font.BOLD,12);
+	protected final Font font = new Font("Times New Roman",Font.BOLD,16);
 	
 	public abstract void draw(int x, int y, Graphics g);
 

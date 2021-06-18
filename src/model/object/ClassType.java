@@ -1,18 +1,12 @@
 package model.object;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClassType extends ObjectType{
-	
-	//private int width = 150;
+
 	private int classHeight = 30;
 	private int attributeHeight = 30;
 	private int operationHeight = 30;
@@ -22,8 +16,8 @@ public class ClassType extends ObjectType{
 	public ClassType(){
 		attributes = new ArrayList<String>();
 		operations = new ArrayList<String>();
-		this.width = 150;
-		this.height = calculateTotalHeight();
+		width = 150;
+		height = calculateTotalHeight();
 	}
 	
 	@Override
@@ -40,7 +34,6 @@ public class ClassType extends ObjectType{
 		g.drawLine(x, y + classHeight + attributeHeight * (attributes.size()+1) , x + width , y + classHeight + attributeHeight * (attributes.size()+1));
 
 	    drawCenteredString(g, name, x, y, width, classHeight);
-		//g.drawString(name, x + width/2 - (name.length()/2)*font., y + classHeight - font);	
 	}
 	
 	private int calculateTotalHeight() {

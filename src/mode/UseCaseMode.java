@@ -8,12 +8,6 @@ import scene.Canvas;
 
 public class UseCaseMode extends Mode{
 
-	/*
-	@Override
-	public void CanvasClicked(MouseEvent e) {
-		MyObject new_usecase = new MyObject_UseCase(e.getX(), e.getY());
-	}
-	*/
 	@Override
 	public void handleCanvasClicked(MouseEvent e) {
 		BaseObject obj = new BaseObject(e.getX(), e.getY(), new UseCaseType());

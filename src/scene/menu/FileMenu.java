@@ -6,10 +6,7 @@ public class FileMenu extends JMenu{
 	
 	private final String text = "File";
 	
-	
 	public FileMenu() {
-		
 		this.setText(text);
-		
 	}
 }

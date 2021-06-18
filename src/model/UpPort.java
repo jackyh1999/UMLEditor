@@ -1,7 +1,5 @@
 package model;
 
-import model.object.BaseObject;
-
 public class UpPort extends Port {
 
 	
@@ -13,13 +11,11 @@ public class UpPort extends Port {
 
 	@Override
 	public int getConnectionX() {
-		// TODO Auto-generated method stub
 		return x + width/2;
 	}
 	
 	@Override
 	public int getConnectionY() {
-		// TODO Auto-generated method stub
 		return y + height;
 	}
 }

@@ -20,6 +20,6 @@ public class MenuItemChangeName extends JMenuItem implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		ChangeNameWindow.getInstance().setVisible(true);
+		ObjectController.getInstance().openChangeNameWindow();
 	}
 }

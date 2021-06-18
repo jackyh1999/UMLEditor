@@ -8,8 +8,8 @@ import java.awt.event.MouseListener;
 public class UseCaseType extends ObjectType{
 		
 	public UseCaseType() {
-		this.width = 150;
-		this.height = 100;
+		width = 150;
+		height = 100;
 	}
 	
 	@Override

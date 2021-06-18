@@ -14,8 +14,6 @@ public class MyMenuBar extends JMenuBar{
 	private final int height = 40;
 	
 	private List<JMenu> menuList;
-	//private MyMenu file;
-	//private MyMenu edit;
 	
 	public MyMenuBar() {
 		

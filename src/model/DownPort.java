@@ -1,7 +1,5 @@
 package model;
 
-import model.object.BaseObject;
-
 public class DownPort extends Port {
 	
 	public DownPort(int x, int y, int width, int height) {
@@ -12,13 +10,11 @@ public class DownPort extends Port {
 	
 	@Override
 	public int getConnectionX() {
-		// TODO Auto-generated method stub
 		return x + width/2;
 	}
 	
 	@Override
 	public int getConnectionY() {
-		// TODO Auto-generated method stub
 		return y;
 	}
 }

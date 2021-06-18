@@ -2,7 +2,6 @@ package mode;
 
 import java.awt.event.MouseEvent;
 
-import model.line.AssociationLine;
 import model.line.CompositionLine;
 import model.line.Line;
 import scene.Canvas;

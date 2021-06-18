@@ -6,6 +6,7 @@ import java.util.List;
 import model.object.CompositeObject;
 import model.object.MyObject;
 import scene.Canvas;
+import scene.ChangeNameWindow;
 
 public class ObjectController {
 	
@@ -27,11 +28,12 @@ public class ObjectController {
 	}
 	
 	public void group() {
+		// 選取的物件少於2個
 		if(selectedList.size() < 2) {
 			System.out.println("Error: Selected objects less than 2");
 		}
+		// 選取的物件個數大於或等於2個
 		else {
-			//List<MyObject> members = new ArrayList<MyObject>();
 			CompositeObject comp = new CompositeObject();
 			for(MyObject obj : selectedList) {
 				obj.setGroup(comp);
@@ -45,14 +47,13 @@ public class ObjectController {
 	}
 	
 	public void unGroup() {
-		if(selectedList.size() != 1) {
-			System.out.println("Error: Please select one composite object to ungroup");
-		}
+		// 選取的物件個數不等於1
+		if(selectedList.size() != 1) System.out.println("Error: Please select one composite object to ungroup");
 		else {
 			MyObject selected = selectedList.get(0);
-			if(selected.getMembers() == null) {
-				System.out.println("Error: You can only ungroup composite object");
-			}
+			// 選取的物件是Base object
+			if(selected.getMembers() == null) System.out.println("Error: You can only ungroup composite object");
+			// 選取的物件是Composite object
 			else {
 				selectedList.remove(0);
 				Canvas.getInstance().getObjectList().remove(selected);
@@ -66,19 +67,21 @@ public class ObjectController {
 		}
 	}
 	
-	public void changeName(String name) {
-		if(selectedList.size() != 1) {
-			System.out.println("Error: Please select one object");
-		}
+	public void openChangeNameWindow() {
+		// 選取的物件個數不等於1
+		if(selectedList.size() != 1) System.out.println("Error: Please select one object");
+		// 選取的物件個數等於1
 		else {
 			MyObject selected = selectedList.get(0);
-			if(selected.getMembers() != null) {
-				System.out.println("Error: You can only change base object's name");
-			}
-			else {
-				selected.setName(name);
-			}
+			// 選取的物件為Composite object
+			if(selected.getMembers() != null) System.out.println("Error: You can only change base object's name");
+			// 選取的物件為base object
+			else ChangeNameWindow.getInstance().setVisible(true);
 		}
+	}
+	
+	public void changeName(String name) {	
+		selectedList.get(0).setName(name);
 	}
 	
 }

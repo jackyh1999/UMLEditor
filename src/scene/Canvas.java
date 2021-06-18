@@ -154,6 +154,4 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 		repaint();
 	}
 	
-
-	
 }
